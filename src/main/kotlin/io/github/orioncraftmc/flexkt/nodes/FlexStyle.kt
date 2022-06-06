@@ -1,14 +1,37 @@
 package io.github.orioncraftmc.flexkt.nodes
 
 import io.github.orioncraftmc.flexkt.enums.css.CssVisibility
-import io.github.orioncraftmc.flexkt.enums.flex.FlexDirection
-import io.github.orioncraftmc.flexkt.enums.flex.FlexJustifyContent
-import io.github.orioncraftmc.flexkt.enums.flex.FlexWrap
+import io.github.orioncraftmc.flexkt.enums.flex.*
 import io.github.orioncraftmc.flexkt.math.css.CssDimension
 import io.github.orioncraftmc.flexkt.math.css.CssMarginRectangle
 import io.github.orioncraftmc.flexkt.math.css.CssNumber
 
 data class FlexStyle(
+    /**
+     * Flex items can be aligned in the cross axis of the current line of the flex container,
+     * similar to justify-content but in the perpendicular direction.
+     *
+     * Align-Items sets the default alignment for all the flex container’s items, including anonymous flex items.
+     */
+    var alignItems: FlexAlignItems = FlexAlignItems.initial,
+    /**
+     * Flex items can be aligned in the cross axis of the current line of the flex container,
+     * similar to justify-content but in the perpendicular direction.
+     *
+     * If either of the flex item’s cross-axis margins are auto, align-self has no effect.
+     *
+     *  Align-Self allows this default alignment to be overridden for individual flex items.
+     *
+     *  (For anonymous flex items, align-self always matches the value of align-items on their associated flex container.)
+     */
+    var alignSelf: FlexAlignSelf = FlexAlignSelf.initial,
+    /**
+     * The align-content property aligns a flex container’s lines within the flex container when there
+     * is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.
+     *
+     * Note, this property has no effect on a single-line flex container.
+     */
+    var alignContent: FlexAlignContent = FlexAlignContent.initial,
     /**
      * The flex-direction property specifies how flex items are placed in the flex container,
      * by setting the direction of the flex container’s main axis.
