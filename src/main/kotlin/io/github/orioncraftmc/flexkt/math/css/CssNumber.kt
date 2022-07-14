@@ -5,6 +5,9 @@ import io.github.orioncraftmc.flexkt.traits.DefaultTrait
 @JvmInline
 value class CssNumber(private val value: Float) {
 
+    val isDefinite
+        get() = value.isFinite()
+
     operator fun plus(other: CssNumber) = CssNumber(value + other.value)
 
     operator fun minus(other: CssNumber) = CssNumber(value - other.value)

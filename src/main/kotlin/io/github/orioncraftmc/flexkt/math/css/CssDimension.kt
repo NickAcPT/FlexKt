@@ -3,13 +3,16 @@ package io.github.orioncraftmc.flexkt.math.css
 sealed class CssDimension(val value: CssNumber) {
     abstract fun resolve(parentDimension: CssNumber): CssNumber
 
-    sealed class CssPixels(value: CssNumber) : CssDimension(value) {
+    inline val isDefinite: Boolean
+        get() = value.isDefinite
+
+    class CssPixels(value: CssNumber) : CssDimension(value) {
         override fun resolve(parentDimension: CssNumber): CssNumber {
             return value
         }
     }
 
-    sealed class CssPercent(value: CssNumber) : CssDimension(value) {
+    class CssPercent(value: CssNumber) : CssDimension(value) {
         override fun resolve(parentDimension: CssNumber): CssNumber {
             return parentDimension * value
         }

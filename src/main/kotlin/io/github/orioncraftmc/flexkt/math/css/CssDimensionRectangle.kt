@@ -4,18 +4,18 @@ import io.github.orioncraftmc.flexkt.math.shapes.CssRectangle
 import io.github.orioncraftmc.flexkt.traits.DefaultTrait
 
 /**
- * Represents a CSS margin rectangle that takes [CssDimension]s for each side.
+ * Represents a rectangle that takes [CssDimension]s for each side.
  */
-class CssMarginRectangle(
+class CssDimensionRectangle(
     left: CssDimension,
     top: CssDimension,
     right: CssDimension,
     bottom: CssDimension
 ) : CssRectangle<CssDimension>(left, top, right, bottom) {
 
-    companion object : DefaultTrait<CssMarginRectangle> {
-        override val initial: CssMarginRectangle
-            get() = CssMarginRectangle(
+    companion object : DefaultTrait<CssDimensionRectangle> {
+        override val initial: CssDimensionRectangle
+            get() = CssDimensionRectangle(
                 CssDimension.CssUndefined,
                 CssDimension.CssUndefined,
                 CssDimension.CssUndefined,

@@ -13,7 +13,7 @@ import io.github.orioncraftmc.flexkt.traits.DefaultTrait
  *
  *  @property isReverse Whether the main-start and main-end directions are swapped.
  */
-enum class FlexDirection(val isReverse: Boolean = false) {
+enum class FlexDirection(val isReverse: Boolean = false, val isRow: Boolean, val isColumn: Boolean) {
 
     /**
      * The flex container’s main axis has the same orientation as the inline axis of the current writing mode.
@@ -21,12 +21,12 @@ enum class FlexDirection(val isReverse: Boolean = false) {
      * The main-start and main-end directions are equivalent to the inline-start and inline-end directions,
      * respectively, of the current writing mode.
      */
-    ROW,
+    ROW(isRow = true, isColumn = false),
 
     /**
      * Same as [ROW], except the main-start and main-end directions are swapped.
      */
-    ROW_REVERSE(isReverse = true),
+    ROW_REVERSE(isReverse = true, isRow = true, isColumn = false),
 
     /**
      * The flex container’s main axis has the same orientation as the block axis of the current writing mode.
@@ -34,12 +34,12 @@ enum class FlexDirection(val isReverse: Boolean = false) {
      * The main-start and main-end directions are equivalent to the block-start and block-end directions, respectively,
      * of the current writing mode.
      */
-    COLUMN,
+    COLUMN(isRow = false, isColumn = true),
 
     /**
      * Same as [COLUMN], except the main-start and main-end directions are swapped.
      */
-    COLUMN_REVERSE(isReverse = true);
+    COLUMN_REVERSE(isReverse = true, isRow = false, isColumn = true);
 
     companion object : DefaultTrait<FlexDirection> {
         override val initial: FlexDirection = ROW
