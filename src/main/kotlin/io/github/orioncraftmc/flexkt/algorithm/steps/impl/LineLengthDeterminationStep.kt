@@ -8,31 +8,35 @@ import io.github.orioncraftmc.flexkt.algorithm.steps.FlexibleBoxStep
 import io.github.orioncraftmc.flexkt.enums.flex.FlexAxis
 import io.github.orioncraftmc.flexkt.math.css.CssDimension
 import io.github.orioncraftmc.flexkt.math.css.CssNumber
+import io.github.orioncraftmc.flexkt.math.shapes.CssDimensionSize
 
 object LineLengthDeterminationStep : FlexibleBoxStep {
+
     override fun layout(context: FlexibleBoxLayoutContext) {
-        val containerStyle = context.containerStyle
+        val flexDirection = context.root.style.flexDirection
 
-        FlexAxis.values().forEach { flexAxis ->
-            val propDim = axisProperty<CssDimension>(flexAxis, containerStyle.flexDirection)
-            val propNum = axisProperty<CssNumber>(flexAxis, containerStyle.flexDirection)
-            val propsRectDim = rectProperties<CssDimension>(flexAxis, containerStyle.flexDirection)
+        for (axis in FlexAxis.values()) {
+            val dimProp = axisProperty<CssDimension>(axis, flexDirection)
+            val numProp = axisProperty<CssNumber>(axis, flexDirection)
+            val rectProps = rectProperties<CssDimension>(axis, flexDirection)
 
-            val rootLength = propNum.get(context.rootSize)
-            val minConstraint = propDim.get(containerStyle.minSize).resolve(rootLength)
-            val maxConstraint = propDim.get(containerStyle.maxSize).resolve(rootLength)
-            val containerLength = propDim.get(containerStyle.size)
+            val containerLength = numProp.get(context.containerSize)
+            val length = dimProp.get(context.root.style.size).resolve(containerLength)
 
-            val result = if (containerLength.isDefinite) {
-                containerLength.resolve(rootLength).coerceAtLeast(minConstraint).coerceAtMost(maxConstraint)
+            val result = if (length.isDefinite) {
+                val minLength = dimProp.get(context.root.style.minSize).resolve(containerLength)
+                val maxLength = dimProp.get(context.root.style.maxSize).resolve(containerLength)
+
+                length.coerceAtLeast(minLength).coerceAtMost(maxLength)
             } else {
-                val marginSum = propsRectDim.map { it.get(containerStyle.margin).resolve(rootLength) }.sum()
-                val paddingSum = propsRectDim.map { it.get(containerStyle.padding).resolve(rootLength) }.sum()
-
-                rootLength - marginSum - paddingSum
+                val marginSum = rectProps.map { it.get(context.root.style.margin).resolve(containerLength) }.sum()
+                val paddingSum = rectProps.map { it.get(context.root.style.padding).resolve(containerLength) }.sum()
+                containerLength - marginSum - paddingSum
             }
 
-            propDim.set(context.avaliableSize, CssDimension.CssPixels(result))
+
+            numProp.set(context.avaliableSize, result)
         }
+
     }
 }

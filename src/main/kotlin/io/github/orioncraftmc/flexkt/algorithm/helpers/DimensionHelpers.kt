@@ -17,7 +17,6 @@ fun <T> axisProperty(dimension: FlexAxis, direction: FlexDirection): KMutablePro
 }
 
 fun <T> rectProperties(dimension: FlexAxis, direction: FlexDirection): Array<KMutableProperty1<CssRectangle<T>, T>> {
-    //val dimensions = arrayOf(/* main axis */CssSize<T>::width, /* cross axis */CssSize<T>::height)
     val dimensions = arrayOf(
         arrayOf(CssRectangle<T>::left, CssRectangle<T>::right),
         arrayOf(CssRectangle<T>::top, CssRectangle<T>::bottom)

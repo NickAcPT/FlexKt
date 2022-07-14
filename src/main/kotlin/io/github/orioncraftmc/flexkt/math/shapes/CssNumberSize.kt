@@ -7,7 +7,7 @@ class CssNumberSize(width: CssNumber, height: CssNumber) : CssSize<CssNumber>(wi
 
     companion object : DefaultTrait<CssNumberSize> {
         override val initial: CssNumberSize
-            get() = CssNumberSize(CssNumber.initial, CssNumber.initial)
+            get() = CssNumberSize(CssNumber.NaN, CssNumber.NaN)
     }
 
 }

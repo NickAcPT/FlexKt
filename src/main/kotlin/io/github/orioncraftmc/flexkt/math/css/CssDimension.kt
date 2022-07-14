@@ -9,7 +9,7 @@ sealed class CssDimension(protected val value: CssNumber) {
     val isDefinite: Boolean
         get() = value.isDefinite
 
-    class CssPixels(value: CssNumber) : CssDimension(value) {
+    class CssPoints(value: CssNumber) : CssDimension(value) {
         override fun resolve(parentDimension: CssNumber): CssNumber {
             return value
         }
@@ -21,7 +21,7 @@ sealed class CssDimension(protected val value: CssNumber) {
         }
     }
 
-    object CssAuto : CssDimension(CssNumber.NaN) {
+    object CssUndefined : CssDimension(CssNumber.NaN) {
         override fun resolve(parentDimension: CssNumber): CssNumber {
             return CssNumber.NaN
         }
@@ -29,7 +29,7 @@ sealed class CssDimension(protected val value: CssNumber) {
 
     companion object : DefaultTrait<CssDimension> {
         override val initial: CssDimension
-            get() = CssPixels(CssNumber.initial)
+            get() = CssUndefined
 
     }
 }

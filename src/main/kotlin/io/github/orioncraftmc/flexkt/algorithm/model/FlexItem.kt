@@ -4,7 +4,7 @@ import io.github.orioncraftmc.flexkt.math.shapes.CssDimensionSize
 import io.github.orioncraftmc.flexkt.nodes.FlexNode
 
 data class FlexItem(private val node: FlexNode) {
-    val style get() = node.style
+    val children: List<FlexItem> = node.children.map { FlexItem(it) }
 
-    var avaliableSize: CssDimensionSize = CssDimensionSize.initial
+    val style get() = node.style
 }

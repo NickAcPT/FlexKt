@@ -14,7 +14,7 @@ object CreateFlexItemsStep : FlexibleBoxStep {
      * - Then finally create the flex items for each node.
      */
     override fun layout(context: FlexibleBoxLayoutContext) {
-        context.container.children
+        context.root.children
             .asSequence()
             .sortedBy { it.style.order }
             .filter { it.style.visibility.affectsLayout }

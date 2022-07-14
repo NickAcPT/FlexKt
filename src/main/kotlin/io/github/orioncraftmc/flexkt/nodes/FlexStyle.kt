@@ -6,7 +6,6 @@ import io.github.orioncraftmc.flexkt.math.css.CssDimension
 import io.github.orioncraftmc.flexkt.math.css.CssDimensionRectangle
 import io.github.orioncraftmc.flexkt.math.css.CssNumber
 import io.github.orioncraftmc.flexkt.math.shapes.CssDimensionSize
-import io.github.orioncraftmc.flexkt.math.shapes.CssSize
 
 data class FlexStyle(
     /**
@@ -68,7 +67,7 @@ data class FlexStyle(
      * flex-basis is resolved the same way as width in horizontal writing modes,
      * except that if a value would resolve to auto for width, it instead resolves to content for flex-basis.
      */
-    var flexBasis: CssDimension = CssDimension.CssAuto,
+    var flexBasis: CssDimension = CssDimension.CssUndefined,
     /**
      * The justify-content property aligns flex items along the main axis of the current line of the flex container.
      *
