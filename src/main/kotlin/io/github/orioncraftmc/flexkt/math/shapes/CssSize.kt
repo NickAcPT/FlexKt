@@ -1,7 +1,7 @@
 package io.github.orioncraftmc.flexkt.math.shapes
 
 /**
- * Represents a generic 2D Point with x and y coordinates of type [T].
+ * Represents a generic 2D Size with width and height sizes of type [T].
  */
 open class CssSize<T>(
     /**

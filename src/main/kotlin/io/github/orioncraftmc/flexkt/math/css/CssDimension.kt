@@ -1,9 +1,12 @@
 package io.github.orioncraftmc.flexkt.math.css
 
-sealed class CssDimension(val value: CssNumber) {
+import io.github.orioncraftmc.flexkt.traits.DefaultTrait
+
+sealed class CssDimension(protected val value: CssNumber) {
+
     abstract fun resolve(parentDimension: CssNumber): CssNumber
 
-    inline val isDefinite: Boolean
+    val isDefinite: Boolean
         get() = value.isDefinite
 
     class CssPixels(value: CssNumber) : CssDimension(value) {
@@ -24,9 +27,9 @@ sealed class CssDimension(val value: CssNumber) {
         }
     }
 
-    object CssUndefined : CssDimension(CssNumber.NaN) {
-        override fun resolve(parentDimension: CssNumber): CssNumber {
-            return CssNumber.NaN
-        }
+    companion object : DefaultTrait<CssDimension> {
+        override val initial: CssDimension
+            get() = CssPixels(CssNumber.initial)
+
     }
 }

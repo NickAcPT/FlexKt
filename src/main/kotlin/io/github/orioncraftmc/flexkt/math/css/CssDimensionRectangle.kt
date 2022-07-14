@@ -16,10 +16,10 @@ class CssDimensionRectangle(
     companion object : DefaultTrait<CssDimensionRectangle> {
         override val initial: CssDimensionRectangle
             get() = CssDimensionRectangle(
-                CssDimension.CssUndefined,
-                CssDimension.CssUndefined,
-                CssDimension.CssUndefined,
-                CssDimension.CssUndefined
+                CssDimension.initial,
+                CssDimension.initial,
+                CssDimension.initial,
+                CssDimension.initial
             )
 
     }

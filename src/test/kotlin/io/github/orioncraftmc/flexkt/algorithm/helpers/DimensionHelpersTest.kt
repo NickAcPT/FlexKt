@@ -2,6 +2,7 @@ package io.github.orioncraftmc.flexkt.algorithm.helpers
 
 import io.github.orioncraftmc.flexkt.enums.flex.FlexAxis
 import io.github.orioncraftmc.flexkt.enums.flex.FlexDirection
+import io.github.orioncraftmc.flexkt.math.css.CssDimension
 import io.github.orioncraftmc.flexkt.math.shapes.CssDimensionSize
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -14,7 +15,7 @@ internal class DimensionHelpersTest {
     @ParameterizedTest
     @MethodSource("axisPropertyTestProvider")
     fun `Size Axis Property helper is correct`(direction: FlexDirection, dimension: FlexAxis, expectedName: String) {
-        assertEquals(expectedName, CssDimensionSize.initial.axisProperty(dimension, direction).name)
+        assertEquals(expectedName, axisProperty<CssDimension>(dimension, direction).name)
     }
 
     companion object {
