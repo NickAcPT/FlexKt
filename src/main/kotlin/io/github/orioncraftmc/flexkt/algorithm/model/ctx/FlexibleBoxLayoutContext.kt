@@ -7,8 +7,5 @@ data class FlexibleBoxLayoutContext(
     val root: FlexItem,
     val containerSize: CssNumberSize
 ) {
-    val flexItems: MutableList<FlexItem> = mutableListOf()
-
     var avaliableSize: CssNumberSize = CssNumberSize.initial
-
 }

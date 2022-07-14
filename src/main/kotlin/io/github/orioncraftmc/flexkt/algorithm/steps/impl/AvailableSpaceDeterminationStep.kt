@@ -8,9 +8,8 @@ import io.github.orioncraftmc.flexkt.algorithm.steps.FlexibleBoxStep
 import io.github.orioncraftmc.flexkt.enums.flex.FlexAxis
 import io.github.orioncraftmc.flexkt.math.css.CssDimension
 import io.github.orioncraftmc.flexkt.math.css.CssNumber
-import io.github.orioncraftmc.flexkt.math.shapes.CssDimensionSize
 
-object LineLengthDeterminationStep : FlexibleBoxStep {
+object AvailableSpaceDeterminationStep : FlexibleBoxStep {
 
     override fun layout(context: FlexibleBoxLayoutContext) {
         val flexDirection = context.root.style.flexDirection
@@ -33,7 +32,6 @@ object LineLengthDeterminationStep : FlexibleBoxStep {
                 val paddingSum = rectProps.map { it.get(context.root.style.padding).resolve(containerLength) }.sum()
                 containerLength - marginSum - paddingSum
             }
-
 
             numProp.set(context.avaliableSize, result)
         }

@@ -30,6 +30,5 @@ sealed class CssDimension(protected val value: CssNumber) {
     companion object : DefaultTrait<CssDimension> {
         override val initial: CssDimension
             get() = CssUndefined
-
     }
 }
