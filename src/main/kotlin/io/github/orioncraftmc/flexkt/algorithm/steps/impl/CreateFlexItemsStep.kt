@@ -5,6 +5,10 @@ import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContex
 import io.github.orioncraftmc.flexkt.algorithm.steps.RecursiveFlexItemFlexibleBoxStep
 
 object CreateFlexItemsStep : RecursiveFlexItemFlexibleBoxStep() {
+
+    override val name: String
+        get() = "Create Flex Items"
+
     /**
      * Performs the first layout step of the flexible box algorithm.
      *

@@ -6,6 +6,8 @@ import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContex
  * Represents a Flexible Box layout step
  */
 interface FlexibleBoxStep {
+    val name: String
+
     fun layout(context: FlexibleBoxLayoutContext)
 }
 

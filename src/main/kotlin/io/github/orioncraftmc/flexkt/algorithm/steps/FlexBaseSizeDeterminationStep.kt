@@ -8,4 +8,7 @@ object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
 
     }
 
+    override val name: String
+        get() = "Determine the flex base size and hypothetical main size of each item"
+
 }
