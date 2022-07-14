@@ -112,6 +112,10 @@ data class FlexStyle(
      * The max-size property sets the maximum width and height of the element.
      */
     var maxSize: CssDimensionSize = CssDimensionSize.initial,
+    /**
+     * The aspect-ratio property sets a ratio between the width and height of the element.
+     */
+    var aspectRatio: CssNumber = CssNumber.NaN,
 ) {
     init {
         check(flexGrow >= CssNumber(0f)) { "flexGrow must be >= 0" }

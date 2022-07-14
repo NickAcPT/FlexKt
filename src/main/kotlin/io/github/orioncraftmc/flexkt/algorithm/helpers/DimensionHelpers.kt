@@ -6,7 +6,7 @@ import io.github.orioncraftmc.flexkt.math.shapes.CssRectangle
 import io.github.orioncraftmc.flexkt.math.shapes.CssSize
 import kotlin.reflect.KMutableProperty1
 
-fun <T> axisProperty(dimension: FlexAxis, direction: FlexDirection): KMutableProperty1<CssSize<T>, T> {
+fun <T : Any> axisProperty(dimension: FlexAxis, direction: FlexDirection): KMutableProperty1<CssSize<T>, T> {
     val dimensions = arrayOf(/* main axis */CssSize<T>::width, /* cross axis */CssSize<T>::height)
     val directions = arrayOf(FlexAxis.MAIN_AXIS, FlexAxis.CROSS_AXIS)
 
@@ -27,6 +27,4 @@ fun <T> rectProperties(dimension: FlexAxis, direction: FlexDirection): Array<KMu
     if (direction.isColumn) dimensions.reverse()
 
     return dimensions[directions.indexOf(dimension)]
-
 }
-

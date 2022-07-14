@@ -4,7 +4,7 @@ import io.github.orioncraftmc.flexkt.math.css.CssDimension
 import io.github.orioncraftmc.flexkt.traits.DefaultTrait
 
 
-class CssDimensionSize(width: CssDimension, height: CssDimension) : CssSize<CssDimension>(width, height) {
+class CssDimensionSize(main: CssDimension, cross: CssDimension) : CssSize<CssDimension>(main, cross) {
 
     companion object : DefaultTrait<CssDimensionSize> {
 

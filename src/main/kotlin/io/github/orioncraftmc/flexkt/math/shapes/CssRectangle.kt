@@ -1,5 +1,6 @@
 package io.github.orioncraftmc.flexkt.math.shapes
 
+
 /**
  * Represents a generic 2D rectangle with a left, top, right, and bottom coordinates of type [T].
  */

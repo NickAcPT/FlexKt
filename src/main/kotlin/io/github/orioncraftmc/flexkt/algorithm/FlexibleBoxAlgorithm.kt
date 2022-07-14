@@ -3,7 +3,7 @@ package io.github.orioncraftmc.flexkt.algorithm
 import io.github.orioncraftmc.flexkt.algorithm.helpers.pass
 import io.github.orioncraftmc.flexkt.algorithm.model.FlexItem
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContext
-import io.github.orioncraftmc.flexkt.algorithm.steps.FlexBaseSizeDeterminationStep
+import io.github.orioncraftmc.flexkt.algorithm.steps.impl.FlexBaseSizeDeterminationStep
 import io.github.orioncraftmc.flexkt.algorithm.steps.impl.CreateFlexItemsStep
 import io.github.orioncraftmc.flexkt.algorithm.steps.impl.AvailableSpaceDeterminationStep
 import io.github.orioncraftmc.flexkt.algorithm.trail.FlexibleBoxTrailAuditor

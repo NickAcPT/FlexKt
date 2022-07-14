@@ -4,6 +4,9 @@ import io.github.orioncraftmc.flexkt.traits.DefaultTrait
 
 sealed class CssDimension(protected val value: CssNumber) {
 
+    open val dependsOnAvailableSpace: Boolean
+        get() = false
+
     abstract fun resolve(parentDimension: CssNumber): CssNumber
 
     val isDefinite: Boolean
@@ -16,6 +19,9 @@ sealed class CssDimension(protected val value: CssNumber) {
     }
 
     class CssPercent(value: CssNumber) : CssDimension(value) {
+        override val dependsOnAvailableSpace: Boolean
+            get() = true
+
         override fun resolve(parentDimension: CssNumber): CssNumber {
             return parentDimension * value
         }

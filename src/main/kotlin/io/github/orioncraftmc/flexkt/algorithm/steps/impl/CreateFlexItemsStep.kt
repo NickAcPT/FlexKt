@@ -2,9 +2,10 @@ package io.github.orioncraftmc.flexkt.algorithm.steps.impl
 
 import io.github.orioncraftmc.flexkt.algorithm.model.FlexItem
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContext
+import io.github.orioncraftmc.flexkt.algorithm.steps.FlexibleBoxStep
 import io.github.orioncraftmc.flexkt.algorithm.steps.RecursiveFlexItemFlexibleBoxStep
 
-object CreateFlexItemsStep : RecursiveFlexItemFlexibleBoxStep() {
+object CreateFlexItemsStep : FlexibleBoxStep {
 
     override val name: String
         get() = "Create Flex Items"
@@ -18,13 +19,13 @@ object CreateFlexItemsStep : RecursiveFlexItemFlexibleBoxStep() {
      * - Then collect the items that participate in the flex layout.
      * - Then finally create the flex items for each node.
      */
-    override fun layout(context: FlexibleBoxLayoutContext, item: FlexItem, parent: FlexItem?) {
-        item.node.children
+    override fun layout(context: FlexibleBoxLayoutContext) {
+        context.root.node.children
             .asSequence()
             .sortedBy { it.style.order }
             .filter { it.style.visibility.affectsLayout }
             .forEach {
-                item.children.add(FlexItem(it))
+                context.root.children.add(FlexItem(it))
             }
     }
 }
