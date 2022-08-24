@@ -10,6 +10,12 @@ inline fun FlexibleBoxTrailAuditor.pass(name: String, code: () -> Unit) {
     passEnd(name)
 }
 
+inline fun FlexibleBoxTrailAuditor.step(name: String, code: () -> Unit) {
+    stepStart(name)
+    code.invoke()
+    stepEnd(name)
+}
+
 inline fun <reified T> KMutableProperty0<T>.notifyPropertyChange(auditor: FlexibleBoxTrailAuditor, name: String, reason: String? = null) {
     val newValue = this.get()
     val clazz = T::class.java

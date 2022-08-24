@@ -1,6 +1,7 @@
 package io.github.orioncraftmc.flexkt.algorithm
 
 import io.github.orioncraftmc.flexkt.algorithm.helpers.pass
+import io.github.orioncraftmc.flexkt.algorithm.helpers.step
 import io.github.orioncraftmc.flexkt.algorithm.model.FlexItem
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContext
 import io.github.orioncraftmc.flexkt.algorithm.steps.impl.FlexBaseSizeDeterminationStep
@@ -25,7 +26,7 @@ object FlexibleBoxAlgorithm {
 
         auditor.pass("First Layout Pass") {
             for ((index, step) in steps.withIndex()) {
-                auditor.pass("Layout Step #${index + 1} - ${step.name}") {
+                auditor.step(step.name) {
                     step.layout(context)
                 }
             }
