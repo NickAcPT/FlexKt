@@ -5,6 +5,7 @@ import io.github.orioncraftmc.flexkt.algorithm.helpers.notifyPropertyChange
 import io.github.orioncraftmc.flexkt.algorithm.model.FlexItem
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContext
 import io.github.orioncraftmc.flexkt.algorithm.steps.RecursiveFlexItemFlexibleBoxStep
+import io.github.orioncraftmc.flexkt.nodes.FlexStyle
 
 object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
 
@@ -27,16 +28,15 @@ object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
      * flow. The flex base size is the item’s max-content main size.
      */
 
-    override fun layout(context: FlexibleBoxLayoutContext, item: FlexItem, parent: FlexItem) {
-        val flexBasis = item.style.flexBasis
+    override fun layout(context: FlexibleBoxLayoutContext, item: FlexItem, parent: FlexItem) = with(context) {
+        val usedFlexBasis = item.resolve(FlexStyle::flexBasis, parent)
 
-        val usedFlexBasis = context.resolve(flexBasis, parent)
         val hasIntrinsicAspectRatio = item.style.aspectRatio.isDefinite
         val crossSize = item.style.size.cross(parent.style.flexDirection)
         val hasDefiniteCrossSize = crossSize.isDefinite
 
         val flexBaseComputeResult = if (hasIntrinsicAspectRatio && hasDefiniteCrossSize) {
-            val usedCrossSize = context.resolve(crossSize, parent)
+            val usedCrossSize = item.resolve("crossSize", crossSize, parent)
             val aspectRatio = item.style.aspectRatio
 
             (usedCrossSize / aspectRatio) to "Item has Intrinsic Aspect Ratio and Definite Cross Size"

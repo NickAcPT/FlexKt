@@ -11,5 +11,7 @@ data class FlexItem(internal val node: FlexNode) {
     val direction get() = style.flexDirection
 
     var flexBaseSize: CssNumber = CssNumber.NaN
+
+    internal var resolvedDimensionsCache = mutableMapOf<String/* Name */, CssNumber/* Result */>()
 }
 
