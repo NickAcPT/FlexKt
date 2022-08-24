@@ -1,9 +1,7 @@
 package io.github.orioncraftmc.flexkt.algorithm.steps.impl
 
 import io.github.orioncraftmc.flexkt.algorithm.helpers.cross
-import io.github.orioncraftmc.flexkt.algorithm.helpers.main
 import io.github.orioncraftmc.flexkt.algorithm.helpers.notifyPropertyChange
-import io.github.orioncraftmc.flexkt.algorithm.helpers.resolve
 import io.github.orioncraftmc.flexkt.algorithm.model.FlexItem
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContext
 import io.github.orioncraftmc.flexkt.algorithm.steps.RecursiveFlexItemFlexibleBoxStep
@@ -32,20 +30,29 @@ object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
     override fun layout(context: FlexibleBoxLayoutContext, item: FlexItem, parent: FlexItem) {
         val flexBasis = item.style.flexBasis
 
-        val usedFlexBasis = flexBasis.resolve(context.containerSize.main(parent.direction))
+        val usedFlexBasis = context.resolve(flexBasis, parent)
         val hasIntrinsicAspectRatio = item.style.aspectRatio.isDefinite
         val crossSize = item.style.size.cross(parent.style.flexDirection)
         val hasDefiniteCrossSize = crossSize.isDefinite
 
-        if (hasIntrinsicAspectRatio && hasDefiniteCrossSize) {
-            
+        val flexBaseComputeResult = if (hasIntrinsicAspectRatio && hasDefiniteCrossSize) {
+            val usedCrossSize = context.resolve(crossSize, parent)
+            val aspectRatio = item.style.aspectRatio
+
+            (usedCrossSize / aspectRatio) to "Item has Intrinsic Aspect Ratio and Definite Cross Size"
         } else if (usedFlexBasis.isDefinite) {
-            // If the item has a definite used flex basis, that’s the flex base size.
-            item.flexBaseSize = usedFlexBasis
+            usedFlexBasis to "Item has a definite used flex basis"
+        } else {
+            null
+        }
+
+        if (flexBaseComputeResult != null) {
+            val (resultingFlexBase, reason) = flexBaseComputeResult
+            item.flexBaseSize = resultingFlexBase
 
             FlexItem::flexBaseSize.notifyPropertyChange(
                 "FlexItem Base Size",
-                reason = "Item has a definite used flex basis",
+                reason = reason,
                 receiver = item,
                 auditor = context.auditor
             )

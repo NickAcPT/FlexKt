@@ -7,6 +7,7 @@ data class FlexItem(internal val node: FlexNode) {
     val children: MutableList<FlexItem> = mutableListOf()
 
     val style get() = node.style
+
     val direction get() = style.flexDirection
 
     var flexBaseSize: CssNumber = CssNumber.NaN
