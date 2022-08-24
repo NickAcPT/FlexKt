@@ -4,8 +4,8 @@ import io.github.orioncraftmc.flexkt.algorithm.helpers.cross
 import io.github.orioncraftmc.flexkt.algorithm.helpers.notifyPropertyChange
 import io.github.orioncraftmc.flexkt.algorithm.model.FlexItem
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleBoxLayoutContext
+import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleItemLayoutConstants
 import io.github.orioncraftmc.flexkt.algorithm.steps.RecursiveFlexItemFlexibleBoxStep
-import io.github.orioncraftmc.flexkt.nodes.FlexStyle
 
 object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
 
@@ -28,32 +28,32 @@ object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
      * flow. The flex base size is the item’s max-content main size.
      */
 
-    override fun layout(context: FlexibleBoxLayoutContext, item: FlexItem, parent: FlexItem) = with(context) {
-        val usedFlexBasis = item.resolve(FlexStyle::flexBasis, parent)
+    override fun layout(context: FlexibleBoxLayoutContext, item: FlexItem, parent: FlexItem) = with(item.constants) {
+        resolvedFlexBasis = context.resolve(item.style.flexBasis, parent)
 
         val hasIntrinsicAspectRatio = item.style.aspectRatio.isDefinite
         val crossSize = item.style.size.cross(parent.style.flexDirection)
         val hasDefiniteCrossSize = crossSize.isDefinite
 
         val flexBaseComputeResult = if (hasIntrinsicAspectRatio && hasDefiniteCrossSize) {
-            val usedCrossSize = item.resolve("crossSize", crossSize, parent)
+            val usedCrossSize = context.resolve(crossSize, parent)
             val aspectRatio = item.style.aspectRatio
 
             (usedCrossSize / aspectRatio) to "Item has Intrinsic Aspect Ratio and Definite Cross Size"
-        } else if (usedFlexBasis.isDefinite) {
-            usedFlexBasis to "Item has a definite used flex basis"
+        } else if (resolvedFlexBasis.isDefinite) {
+            resolvedFlexBasis to "Item has a definite used flex basis"
         } else {
             null
         }
 
         if (flexBaseComputeResult != null) {
             val (resultingFlexBase, reason) = flexBaseComputeResult
-            item.flexBaseSize = resultingFlexBase
+            flexBaseSize = resultingFlexBase
 
-            FlexItem::flexBaseSize.notifyPropertyChange(
+            FlexibleItemLayoutConstants::flexBaseSize.notifyPropertyChange(
                 "FlexItem Base Size",
                 reason = reason,
-                receiver = item,
+                receiver = item.constants,
                 auditor = context.auditor
             )
         }
