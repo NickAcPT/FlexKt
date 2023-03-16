@@ -6,6 +6,8 @@ import io.github.orioncraftmc.flexkt.traits.DefaultTrait
 
 class CssDimensionSize(main: CssDimension, cross: CssDimension) : CssSize<CssDimension>(main, cross) {
 
+    val isUndefined get() = width is CssDimension.CssUndefined && height is CssDimension.CssUndefined
+
     companion object : DefaultTrait<CssDimensionSize> {
 
         val undefined: CssDimensionSize

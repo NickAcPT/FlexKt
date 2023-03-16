@@ -39,10 +39,11 @@ value class CssNumber(private val value: Float) {
         return if (value > other.value) other else this
     }
 
-    companion object : DefaultTrait<CssNumber> {
-        val NaN: CssNumber = CssNumber(Float.NaN)
+    override fun toString() = value.toString()
 
+    companion object : DefaultTrait<CssNumber> {
+
+        val NaN: CssNumber = CssNumber(Float.NaN)
         override val initial: CssNumber = CssNumber(0f)
     }
-
 }

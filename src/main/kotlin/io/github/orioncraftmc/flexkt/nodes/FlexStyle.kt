@@ -58,7 +58,8 @@ data class FlexStyle(
      */
     var flexShrink: CssNumber = CssNumber.initial,
     /**
-     * The flex-basis property sets the flex basis.
+     * The flex-basis property sets the flex basis: The initial main size of the flex item,
+     * before free space is distributed according to the flex factors.
      *
      * It accepts the same values as the width and height property,
      * plus content.

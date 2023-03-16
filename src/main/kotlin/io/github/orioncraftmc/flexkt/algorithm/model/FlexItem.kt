@@ -1,7 +1,6 @@
 package io.github.orioncraftmc.flexkt.algorithm.model
 
 import io.github.orioncraftmc.flexkt.algorithm.model.ctx.FlexibleItemLayoutConstants
-import io.github.orioncraftmc.flexkt.math.css.CssNumber
 import io.github.orioncraftmc.flexkt.nodes.FlexNode
 
 data class FlexItem(internal val node: FlexNode) {
