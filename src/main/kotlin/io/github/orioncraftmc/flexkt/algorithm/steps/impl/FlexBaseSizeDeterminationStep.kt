@@ -40,14 +40,14 @@ object FlexBaseSizeDeterminationStep : RecursiveFlexItemFlexibleBoxStep() {
         for (axis in FlexAxis.values()) {
             val flexBaseComputeResult = if (usedFlexBasis.isDefinite) {
                 /*If the item has a definite used flex basis, that’s the flex base size. */
-                context.resolveMain(usedFlexBasis, parent) to "Item has a definite used flex basis"
+                context.resolveAxis(usedFlexBasis, axis, parent) to "Item has a definite used flex basis"
             } else if (hasIntrinsicAspectRatio && hasDefiniteCrossSize) {
                 /*
                  * If the flex item has: an intrinsic aspect ratio, a used flex basis of content, and
                  * a definite cross size, then the flex base size is calculated from its inner cross size
                  * and the flex item’s intrinsic aspect ratio.
                  */
-                val usedCrossSize = context.resolveMain(crossSize, parent)
+                val usedCrossSize = context.resolveAxis(crossSize, axis, parent)
                 val aspectRatio = item.style.aspectRatio
 
                 // TODO: Add CssContent for "a used flex basis of content"
