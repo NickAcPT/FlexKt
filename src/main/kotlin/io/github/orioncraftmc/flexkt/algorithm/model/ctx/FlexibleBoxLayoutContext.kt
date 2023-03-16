@@ -23,13 +23,5 @@ data class FlexibleBoxLayoutContext(
     ): CssNumber {
         return dimension.resolve(size.axis(axis, parent.direction))
     }
-
-    fun resolveMain(dimension: CssDimension, parent: FlexItem, size: CssNumberSize = containerSize): CssNumber {
-        return resolveAxis(dimension, FlexAxis.MAIN_AXIS, parent, size)
-    }
-
-    fun resolveCross(dimension: CssDimension, parent: FlexItem, size: CssNumberSize = containerSize): CssNumber {
-        return resolveAxis(dimension, FlexAxis.CROSS_AXIS, parent, size)
-    }
 }
 
